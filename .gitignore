@@ -67,3 +67,6 @@ target/
 
 # PyCharm
 .idea/
+
+# Ignore private token file.
+my_private_token.txt
