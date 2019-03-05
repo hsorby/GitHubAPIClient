@@ -37,8 +37,8 @@ def main():
     print('List of Contributors')
     print('====================')
     print('')
-    print('The following is a list of contributors(in surname alphabetical order) who have contributed lines of')
-    print('source code to the libCellML project on or before {0}.'.format(today))
+    print('The following is a list of contributors (in surname alphabetical order) who have contributed lines of '
+          'source code to the libCellML project on or before {0}.'.format(today))
     print('')
     for combined_data in combined_sorted_contributor_names:
         print(' * `{0} <{1}>`_'.format(combined_data[0], combined_data[1]))
