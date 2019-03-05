@@ -1,6 +1,10 @@
 
 import datetime
+
 from github import Github
+
+
+MISSING_NAME_DB = {'TedAhmadi': 'Ted Ahmadi'}
 
 
 def main():
@@ -18,10 +22,15 @@ def main():
     contributor_html_urls = []
 
     for c in contributors:
-        contributor_names.append(c.name)
+        if c.name is None and c.login in MISSING_NAME_DB:
+            contributor_names.append(MISSING_NAME_DB[c.login])
+        else:
+            contributor_names.append(c.name)
+
         contributor_html_urls.append(c.html_url)
 
-    combined_sorted_contributor_names = sorted(zip(contributor_names, contributor_html_urls), key=lambda pair: pair[0].split(" ")[-1])
+    combined_sorted_contributor_names = sorted(zip(contributor_names, contributor_html_urls),
+                                               key=lambda pair: pair[0].split(" ")[-1])
 
     today = datetime.date.today()
     print('')
@@ -29,10 +38,10 @@ def main():
     print('====================')
     print('')
     print('The following is a list of contributors(in surname alphabetical order) who have contributed lines of')
-    print('source code to the LibCellML project on or before {0}.'.format(today))
+    print('source code to the libCellML project on or before {0}.'.format(today))
     print('')
     for combined_data in combined_sorted_contributor_names:
-        print(' * `{0} <{1}>`_'.format(combined_data[0],combined_data[1]))
+        print(' * `{0} <{1}>`_'.format(combined_data[0], combined_data[1]))
     print('')
     print('For an up-to-date list of contributors see https://github.com/cellml/libcellml/graphs/contributors.')
     print('')
